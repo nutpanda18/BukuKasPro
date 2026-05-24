@@ -1,10 +1,10 @@
 <?php
 
-$host = getenv("DB_HOST");
-$port = getenv("DB_PORT");
-$db   = getenv("DB_NAME");
-$user = getenv("DB_USER");
-$pass = getenv("DB_PASSWORD");
+$host = getenv("gateway01.ap-southeast-1.prod.alicloud.tidbcloud.com");
+$port = getenv("4000");
+$db   = getenv("bukukaspro");
+$user = getenv("2K5i5b6SJjhkQCe.root");
+$pass = getenv("RTUpMBtlWgl0bf4g");
 
 try {
 
