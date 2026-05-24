@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BukuKasPro - Kelola Keuangan UMKM Tanpa Ribet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/BukuKasPro/assets/css/style.css">
+</head>
+<body class="landing-body">
+
+    <nav class="landing-nav" id="mainNavbar">
+        <div class="nav-wrapper">
+            <div class="logo">
+                BukuKas<span class="logo-accent">Pro</span>
+            </div>
+            <div class="nav-links">
+                <a href="#about" class="nav-item">Tentang</a>
+                <a href="#features" class="nav-item">Fitur</a>
+                <a href="#reports" class="nav-item">Laporan</a>
+                <a href="#contact" class="nav-item">Kontak</a>
+            </div>
+            <div class="nav-actions">
+                <a href="login.php" class="btn-login-outline">Masuk</a>
+                <a href="register.php" class="btn-register-solid">Daftar Gratis</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section" id="about">
+        <div class="hero-wrapper">
+            <div class="hero-content fade-in-element">
+                <h1 class="hero-title">
+                    Kelola Keuangan UMKM <br>
+                    <span class="hero-subtitle">Tanpa Ribet!</span>
+                </h1>
+                <p class="hero-description">
+                    Platform akuntansi cloud untuk UMKM dengan tampilan sederhana, pencatatan instan, dan kalkulasi laporan otomatis secara real-time.
+                </p>
+                <div class="hero-actions">
+                    <a href="register.php" class="btn-cta">Mulai Gratis &rarr;</a>
+                </div>
+            </div>
+            
+            <div class="hero-illustration fade-in-element">
+                <div class="chart-container-box">
+                    <div class="chart-header-ui">
+                        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                        <p class="chart-ui-title">Arus Kas BukuKasPro</p>
+                    </div>
+                    <div class="dummy-bar-chart">
+                        <div class="bar-item" style="--bar-height: 40%"><span class="bar-label">Jan</span></div>
+                        <div class="bar-item" style="--bar-height: 65%"><span class="bar-label">Feb</span></div>
+                        <div class="bar-item highlight" style="--bar-height: 85%"><span class="bar-label">Mar</span></div>
+                        <div class="bar-item" style="--bar-height: 50%"><span class="bar-label">Apr</span></div>
+                        <div class="bar-item" style="--bar-height: 95%"><span class="bar-label">Mei</span></div>
+                    </div>
+                    <div class="chart-stat-badge">
+                        <span class="badge-icon">📈</span>
+                        <div>
+                            <h4>Omzet Naik</h4>
+                            <p>+24.5% Bulan Ini</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="features-section" id="features">
+        <div class="section-header-center fade-in-element">
+            <span class="section-tag">FITUR UNGGULAN</span>
+            <h2>Solusi Pembukuan Digital Terintegrasi</h2>
+            <p>Segala kebutuhan administrasi finansial toko Anda diselesaikan dalam beberapa klik saja.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card fade-in-element">
+                <div class="feature-icon-wrapper">✍️</div>
+                <h3>Pencatatan Transaksi Simpel</h3>
+                <p>Catat pemasukan dan pengeluaran harian operasional tanpa perlu paham teori akuntansi debit-kredit.</p>
+            </div>
+            <div class="feature-card fade-in-element">
+                <div class="feature-icon-wrapper">📊</div>
+                <h3>Grafik Arus Kas Real-Time</h3>
+                <p>Visualisasi performa keuangan bisnis Anda secara transparan melalui grafik dan diagram interaktif.</p>
+            </div>
+            <div class="feature-card fade-in-element" id="reports">
+                <div class="feature-icon-wrapper">📄</div>
+                <h3>Laporan Keuangan Otomatis</h3>
+                <p>Unduh laporan neraca saldo, arus kas harian, PDF, hingga Excel dalam hitungan detik secara instan.</p>
+            </div>
+            <div class="feature-card fade-in-element">
+                <div class="feature-icon-wrapper">🔔</div>
+                <h3>Smart Reminder Hutang</h3>
+                <p>Kirim pesan pengingat tagihan dan penagihan piutang otomatis langsung ke WhatsApp klien Anda.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonial-section">
+        <div class="testimonial-container fade-in-element">
+            <div class="testimonial-slider">
+                <div class="testimonial-slide active">
+                    <p class="quote-text">“BukuKasPro membuat pembukuan saya jauh lebih mudah, cepat, dan terlihat sangat profesional di depan investor!”</p>
+                    <h4 class="quote-author">Hendra Wijaya</h4>
+                    <span class="quote-biz">Owner Toko Berkah Mandiri</span>
+                </div>
+                <div class="testimonial-slide">
+                    <p class="quote-text">“Fitur Smart Reminder WhatsApp sangat membantu mengurangi piutang macet pelanggan hingga 80%. Aplikasi yang luar biasa!”</p>
+                    <h4 class="quote-author">Samira Aisya</h4>
+                    <span class="quote-biz">Founder Fashion Line</span>
+                </div>
+            </div>
+            <div class="slider-dots">
+                <span class="dot-indicator active" onclick="currentSlide(0)"></span>
+                <span class="dot-indicator" onclick="currentSlide(1)"></span>
+            </div>
+        </div>
+    </section>
+
+    <footer class="landing-footer" id="contact">
+        <div class="footer-wrapper">
+            <div class="footer-brand">
+                <h3>BukuKas<span>Pro</span></h3>
+                <p>Platform pembukuan modern cloud untuk akselerasi pertumbuhan skala bisnis UMKM Indonesia.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Link Cepat</h4>
+                <a href="#about">Tentang</a>
+                <a href="#features">Fitur</a>
+                <a href="#reports">Laporan</a>
+            </div>
+            <div class="footer-contact">
+                <h4>Hubungi Kami</h4>
+                <p>📧 support@bukukaspro.com</p>
+                <p>📞 +62 812-3456-7890</p>
+                <p>📍 Jakarta, Indonesia</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <?= date('Y'); ?> BukuKasPro. Hak Cipta Dilindungi Undang-Undang.</p>
+        </div>
+    </footer>
+
+    <script src="./assets/js/landing.js"></script>
+</body>
+</html>
