@@ -20,7 +20,8 @@ try {
     PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => true
 ];
 
-    $pdo = new PDO($dsn, $username, $password, $options);
+    // CHANGE THIS:
+    $pdo = new PDO($dsn, $user, $pass, $options);
     
 } catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
