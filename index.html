@@ -7,7 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/BukuKasPro/assets/css/style.css">
+    
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="landing-body">
 
@@ -23,8 +24,8 @@
                 <a href="#contact" class="nav-item">Kontak</a>
             </div>
             <div class="nav-actions">
-                <a href="login.php" class="btn-login-outline">Masuk</a>
-                <a href="register.php" class="btn-register-solid">Daftar Gratis</a>
+                <a href="views/login.php" class="btn-login-outline">Masuk</a>
+                <a href="views/register.php" class="btn-register-solid">Daftar Gratis</a>
             </div>
         </div>
     </nav>
@@ -40,7 +41,7 @@
                     Platform akuntansi cloud untuk UMKM dengan tampilan sederhana, pencatatan instan, dan kalkulasi laporan otomatis secara real-time.
                 </p>
                 <div class="hero-actions">
-                    <a href="register.php" class="btn-cta">Mulai Gratis &rarr;</a>
+                    <a href="views/register.php" class="btn-cta">Mulai Gratis &rarr;</a>
                 </div>
             </div>
             
@@ -141,10 +142,10 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; <?= date('Y'); ?> BukuKasPro. Hak Cipta Dilindungi Undang-Undang.</p>
+            <p>&copy; <script>document.write(new Date().getFullYear());</script> BukuKasPro. Hak Cipta Dilindungi Undang-Undang.</p>
         </div>
     </footer>
 
-    <script src="./assets/js/landing.js"></script>
+    <script src="assets/js/landing.js"></script>
 </body>
 </html>
