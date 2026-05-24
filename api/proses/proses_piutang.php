@@ -40,11 +40,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tanggal_jatuh_tempo = $_POST['tanggal_jatuh_tempo'];
 
     try {
-        // Prepare row insertion matching your real MySQL schema layout
-        $sql = "INSERT INTO hutang_piutang (nama_kontak, no_whatsapp, nominal, jenis_tagihan, tanggal_jatuh_tempo, status_tagihan) 
-                VALUES (?, ?, ?, ?, ?, 'Belum Bayar')";
+        // 🌟 ADDED FIX FOR TiDB CLUSTERED INDEX: Generate random unique ID
+        $piutang_id = rand(100000, 999999);
+
+        // Prepare row insertion matching your real MySQL schema layout (Explicitly include id)
+        $sql = "INSERT INTO hutang_piutang (id, nama_kontak, no_whatsapp, nominal, jenis_tagihan, tanggal_jatuh_tempo, status_tagihan) 
+                VALUES (?, ?, ?, ?, ?, ?, 'Belum Bayar')";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$nama_kontak, $no_whatsapp, $nominal, $jenis_tagihan, $tanggal_jatuh_tempo]);
+        $stmt->execute([$piutang_id, $nama_kontak, $no_whatsapp, $nominal, $jenis_tagihan, $tanggal_jatuh_tempo]);
 
         // COMPACT ROUTING ROUTE: Send them back to their respective origin screen layout deck
         if ($_COOKIE['role'] === 'finance') {
@@ -63,39 +66,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: ../views/" . $fallback);
     exit;
 }
-
-require_once dirname(__DIR__) . '/config/database.php';
-
-// ACTION 1: Handling the Settle action from the table links (GET request)
-if (isset($_GET['action']) && $_GET['action'] === 'settle') {
-    $id = (int)$_GET['id'];
-    try {
-        $stmt = $pdo->prepare("UPDATE hutang_piutang SET status_tagihan = 'Lunas' WHERE id = ?");
-        $stmt->execute([$id]);
-        header("Location: ../views/dashboard_owner.php?page=piutang&status=settled");
-        exit;
-    } catch (PDOException $e) {
-        die("Error updating entry: " . $e->getMessage());
-    }
-}
-
-// ACTION 2: Handling the New Entry form submission (POST request)
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nama_kontak         = trim($_POST['nama_kontak']);
-    $no_whatsapp        = trim($_POST['no_whatsapp']);
-    $nominal            = (float)$_POST['nominal'];
-    $jenis_tagihan      = $_POST['jenis_tagihan'];
-    $tanggal_jatuh_tempo = $_POST['tanggal_jatuh_tempo'];
-
-    try {
-        $sql = "INSERT INTO hutang_piutang (nama_kontak, no_whatsapp, nominal, jenis_tagihan, tanggal_jatuh_tempo, status_tagihan) 
-                VALUES (?, ?, ?, ?, ?, 'Belum Bayar')";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$nama_kontak, $no_whatsapp, $nominal, $jenis_tagihan, $tanggal_jatuh_tempo]);
-
-        header("Location: ../views/dashboard_owner.php?page=piutang&status=success");
-        exit;
-    } catch (PDOException $e) {
-        die("Error saving entry: " . $e->getMessage());
-    }
-}
+?>
