@@ -1,13 +1,12 @@
 <?php
 
-$host = getenv("gateway01.ap-southeast-1.prod.alicloud.tidbcloud.com");
-$port = getenv("4000");
-$db   = getenv("bukukaspro");
-$user = getenv("2K5i5b6SJjhkQCe.root");
-$pass = getenv("RTUpMBtlWglobf4G");
+$host = "gateway01.ap-southeast-1.prod.alicloud.tidbcloud.com";
+$port = "4000";
+$db   = "bukukaspro";
+$user = "2K5i5b6SJjhkQCe.root";
+$pass = "RTUpMBtlWglobf4G";
 
 try {
-    // FORCE TCP CONNECTION: Add your exact TiDB host string here
     $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=utf8mb4";
     
     $options = [
@@ -22,3 +21,4 @@ try {
 } catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }
+?>
