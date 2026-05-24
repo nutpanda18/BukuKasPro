@@ -1,77 +1,55 @@
 <?php
-// Hubungkan dengan file konfigurasi koneksi database PDO BukuKasPro
 require_once dirname(__DIR__) . '/config/database.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username']);
     $password = $_POST['password'];
 
     try {
-        // 1. CARI USER DI DATABASE BERDASARKAN USERNAME ATAU EMAIL
-        $sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
-        $stmt = $pdo->prepare($sql);
+        // Cari data pengguna di database
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
         $stmt->execute([$username]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $user = $stmt->fetch();
 
-        // 2. VERIFIKASI APAKAH USER DITEMUKAN DAN PASSWORD MATCH (ENKRIPSI DECRYPT)
+        // Verifikasi kecocokan sandi
         if ($user && password_verify($password, $user['password'])) {
             
-            $role = $user['role'];
-            $nama = $user['nama'];
-            $user_id = $user['id'];
+            // Waktu kedaluwarsa cookie (1 hari)
+            $cookie_expire = time() + (86400 * 1); 
 
-            // 3. SUNTIKKAN CREDENTIALS KE COOKIES AGAR VALIDASI DASHBOARD BERJALAN SINKRON
-            setcookie('user_id', $user_id, time() + (86400 * 30), "/");
-            setcookie('role', $role, time() + (86400 * 30), "/");
-            setcookie('nama', $nama, time() + (86400 * 30), "/");
+            // Simpan kredensial ke dalam Cookie Browser agar bisa diakses di semua folder
+            setcookie('user_id', $user['id'], $cookie_expire, "/");
+            setcookie('nama', $user['nama'], $cookie_expire, "/");
+            setcookie('role', $user['role'], $cookie_expire, "/");
 
-            // 4. LOGIKA ROUTING PENGALIHAN MENUJU SUBFOLDER VIEWS/ SECARA AKURAT
-            switch ($role) {
+            // Redirect otomatis sesuai peran (role) dari database
+            switch ($user['role']) {
                 case 'owner':
                     header("Location: ../views/dashboard_owner.php");
-                    exit();
                     break;
-                    
                 case 'finance':
                     header("Location: ../views/dashboard_finance.php");
-                    exit();
                     break;
-                    
                 case 'cashier':
                     header("Location: ../views/dashboard_cashier.php");
-                    exit();
                     break;
-                    
                 default:
-                    // Jika role di database di luar 3 role utama
-                    echo "<script type='text/javascript'>
-                            alert('Akses Ditolak: Hak akses akun Anda tidak dikenali!');
-                            window.location.href = '../login.php';
-                          </script>";
-                    exit();
-                    break;
+                    // Bersihkan cookie jika tidak memiliki peran valid
+                    setcookie('user_id', '', time() - 3600, "/");
+                    setcookie('nama', '', time() - 3600, "/");
+                    setcookie('role', '', time() - 3600, "/");
+                    die("Error: Akun Anda tidak memiliki peran akses valid.");
             }
-
+            exit;
+            
         } else {
-            // Pop-up jika kombinasi password salah atau data tidak match di tabel users
-            echo "<script type='text/javascript'>
-                    alert('Gagal Masuk: Username atau Password Anda salah!');
-                    window.history.back();
-                  </script>";
-            exit();
+            echo "<script>alert('Gagal! Identitas akun salah.'); window.location='../login.php';</script>";
+            exit;
         }
-
     } catch (PDOException $e) {
-        // Penanganan darurat jika MySQL mati atau crash sewaktu-waktu
-        echo "<script type='text/javascript'>
-                alert('Gangguan Sistem: Gagal terhubung ke database server!');
-                window.history.back();
-              </script>";
-        exit();
+        die("Proses login bermasalah: " . $e->getMessage());
     }
 } else {
-    // Proteksi direct access URL ilegal
-    header("Location: ../login.php");
-    exit();
+    echo "Akses ditolak.";
 }
 ?>
