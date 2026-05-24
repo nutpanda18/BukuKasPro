@@ -11,14 +11,6 @@
       "dest": "/assets/$1"
     },
     {
-      "src": "/views/(.*)",
-      "dest": "/api/views/$1"
-    },
-    {
-      "src": "/proses/(.*)",
-      "dest": "/api/proses/$1"
-    },
-    {
       "src": "/login.php",
       "dest": "/api/login.php"
     },
@@ -27,8 +19,12 @@
       "dest": "/api/register.php"
     },
     {
-      "src": "/$",
-      "dest": "/index.html"
+      "src": "/views/(.*)",
+      "dest": "/api/views/$1"
+    },
+    {
+      "src": "/proses/(.*)",
+      "dest": "/api/proses/$1"
     },
     {
       "src": "/(.*)",
