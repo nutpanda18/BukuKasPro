@@ -27,10 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $role = 'cashier';    // Email/User ke-3 dst otomatis Kasir
         }
 
-        // 3. Simpan user baru ke database
-        $sql = "INSERT INTO users (nama, username, password, role) VALUES (?, ?, ?, ?)";
+        // 🌟 ADDED FIX FOR TiDB CLUSTERED INDEX: Generate random ID unique integer
+        $id_unik = rand(100000, 999999);
+
+        // 3. Simpan user baru ke database (Updated to explicitly inject the id)
+        $sql = "INSERT INTO users (id, nama, username, password, role) VALUES (?, ?, ?, ?, ?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$nama, $username, $password, $role]);
+        $stmt->execute([$id_unik, $nama, $username, $password, $role]);
 
         echo "<script>alert('Registrasi Berhasil! Peran Anda ditetapkan otomatis sebagai: $role.'); window.location='../login.php';</script>";
         exit;
