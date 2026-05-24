@@ -8,7 +8,7 @@
   "routes": [
     {
       "src": "/assets/(.*)",
-      "dest": "/assets/$1"
+      "dest": "/api/assets/$1"
     },
     {
       "src": "/login.php",
@@ -25,14 +25,6 @@
     {
       "src": "/proses/(.*)",
       "dest": "/api/proses/$1"
-    },
-    {
-      "src": "/config/(.*)",
-      "dest": "/api/config/$1"
-    },
-    {
-      "src": "/uploads/(.*)",
-      "dest": "/api/uploads/$1"
     },
     {
       "src": "/(.*)",
