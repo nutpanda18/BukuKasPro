@@ -37,10 +37,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $no_whatsapp        = trim($_POST['no_whatsapp']);
     $nominal            = (float)$_POST['nominal'];
     $jenis_tagihan      = $_POST['jenis_tagihan'];
-    $tanggal_jatuh_tempo = $_POST['tanggal_jatuh_tempo'];
+    
+    // 🌟 TIMESTAMP FIX: Append the precise active server time to the date picker string
+    if (!empty($_POST['tanggal_jatuh_tempo'])) {
+        $tanggal_jatuh_tempo = $_POST['tanggal_jatuh_tempo'] . ' ' . date('H:i:s');
+    } else {
+        $tanggal_jatuh_tempo = date('Y-m-d H:i:s');
+    }
 
     try {
-        // 🌟 ADDED FIX FOR TiDB CLUSTERED INDEX: Generate random unique ID
+        // ADDED FIX FOR TiDB CLUSTERED INDEX: Generate random unique ID
         $piutang_id = rand(100000, 999999);
 
         // Prepare row insertion matching your real MySQL schema layout (Explicitly include id)
