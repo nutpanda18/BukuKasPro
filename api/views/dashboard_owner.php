@@ -179,7 +179,7 @@ try {
 
             <?php if ($current_page === 'ringkasan'): ?>
                 <div class="dashboard-hero-banner">
-                    <img src="/BukuKasPro/assets/img/accounting.png" alt="Financial Accounting Overview Header">
+                    <img src="/assets/img/accounting.png" alt="Financial Accounting Overview Header" class="your-class">
                 </div>
             <?php endif; ?>
 
