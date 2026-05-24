@@ -4,7 +4,7 @@ $host = "gateway01.ap-southeast-1.prod.alicloud.tidbcloud.com";
 $port = "4000";
 $db   = "bukukaspro";
 $user = "2K5i5b6SJjhkQCe.root";
-$pass = "RTUpMBtlWglobf4G";
+$pass = "L8KLFbX1pfSoxl9o";
 
 try {
     $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=utf8mb4";
