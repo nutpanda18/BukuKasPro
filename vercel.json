@@ -1,46 +1,42 @@
 {
   "version": 2,
-
   "functions": {
     "api/**/*.php": {
       "runtime": "vercel-php@0.6.0"
     }
   },
-
   "routes": [
     {
       "src": "/assets/(.*)",
       "dest": "/assets/$1"
     },
-
     {
-      "src": "/login",
+      "src": "/login.php",
       "dest": "/api/login.php"
     },
-
     {
-      "src": "/register",
+      "src": "/register.php",
       "dest": "/api/register.php"
     },
-
-    {
-      "src": "/owner/(.*)",
-      "dest": "/api/owner/$1"
-    },
-
-    {
-      "src": "/proses/(.*)",
-      "dest": "/api/proses/$1"
-    },
-
     {
       "src": "/views/(.*)",
       "dest": "/api/views/$1"
     },
-
+    {
+      "src": "/proses/(.*)",
+      "dest": "/api/proses/$1"
+    },
+    {
+      "src": "/config/(.*)",
+      "dest": "/api/config/$1"
+    },
+    {
+      "src": "/uploads/(.*)",
+      "dest": "/api/uploads/$1"
+    },
     {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "/$1"
     }
   ]
 }
