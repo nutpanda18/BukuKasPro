@@ -17,15 +17,15 @@ $user_id = $_COOKIE['user_id'];
 $hari_ini = date('Y-m-d');
 
 try {
-    // Fetch only transactions inputted by this specific cashier TODAY
-    // Sorted by latest entry first (DESC)
-    $sql_logs = "SELECT DATE_FORMAT(created_at, '%H:%i') as waktu, keterangan, jenis_transaksi, nominal 
+    // 🌟 THE CRUCIAL FIX: Read and format from 'tanggal' instead of the empty 'created_at' column
+    // We use LIKE to match any timestamp starting with today's date (e.g., '2026-05-24%')
+    $sql_logs = "SELECT DATE_FORMAT(tanggal, '%H:%i') as waktu, keterangan, jenis_transaksi, nominal 
                  FROM transaksi 
-                 WHERE user_id = ? AND tanggal = ? 
+                 WHERE user_id = ? AND tanggal LIKE ? 
                  ORDER BY id DESC";
     
     $stmt_logs = $pdo->prepare($sql_logs);
-    $stmt_logs->execute([$user_id, $hari_ini]);
+    $stmt_logs->execute([$user_id, $hari_ini . '%']);
     $logs_penjualan = $stmt_logs->fetchAll(PDO::FETCH_ASSOC);
 
 } catch (PDOException $e) {
