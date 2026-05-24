@@ -11,11 +11,14 @@ try {
     $dsn = "mysql:host=$host;port=$port;dbname=$db_name;charset=utf8mb4";
     
     $options = [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        // CRUCIAL FIX: Force MySQL driver to execute over SSL
-        PDO::MYSQL_ATTR_SSL_CA => true 
-    ];
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    
+    // Enforce the explicit path to your new TiDB Cloud root certificate
+    PDO::MYSQL_ATTR_SSL_CA => __DIR__ . '/isrgrootx1.pem',
+    
+    PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => true
+];
 
     $pdo = new PDO($dsn, $username, $password, $options);
     
