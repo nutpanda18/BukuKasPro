@@ -1,11 +1,15 @@
 {
   "version": 2,
-  "functions": {
-    "**/*.php": {
-      "runtime": "vercel-php@8.2"
+  "builds": [
+    {
+      "src": "**/*.php",
+      "use": "now-php@1.0.0"
     }
-  },
+  ],
   "routes": [
-    { "src": "/(.*)", "dest": "/$1" }
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
   ]
 }
