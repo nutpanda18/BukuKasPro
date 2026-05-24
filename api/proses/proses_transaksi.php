@@ -31,28 +31,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        $sql = "INSERT INTO transaksi (user_id, nominal, tanggal, kategori, jenis_transaksi, keterangan, nota) 
-                VALUES (?, ?, ?, ?, ?, ?, ?)";
+        // 🌟 ADDED FIX FOR TiDB CLUSTERED INDEX: Generate random unique transaction ID
+        $transaksi_id = rand(100000, 999999);
+
+        // 3. Simpan transaksi baru ke database (Explicitly include the id parameter)
+        $sql = "INSERT INTO transaksi (id, user_id, nominal, tanggal, kategori, jenis_transaksi, keterangan, nota) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$user_id, $nominal, $tanggal, $kategori, $jenis, $keterangan, $nama_nota]);
+        $stmt->execute([$transaksi_id, $user_id, $nominal, $tanggal, $kategori, $jenis, $keterangan, $nama_nota]);
 
         // BULLETPROOF EXPLICIT REDIRECTION (Now completely isolated per role)
         if (isset($_COOKIE['role'])) {
-    $current_role = $_COOKIE['role'];
-    
-    if ($current_role === 'owner') {
-        header("Location: ../views/dashboard_owner.php?status=success");
-    } elseif ($current_role === 'finance') {
-        header("Location: ../views/dashboard_finance.php?status=success");
-    } elseif ($current_role === 'cashier') {
-        header("Location: ../views/dashboard_cashier.php?status=success");
-    } else {
-        header("Location: ../index.html");
-    }
-} else {
-    header("Location: ../index.html");
-}
-exit;
+            $current_role = $_COOKIE['role'];
+            
+            if ($current_role === 'owner') {
+                header("Location: ../views/dashboard_owner.php?status=success");
+            } elseif ($current_role === 'finance') {
+                header("Location: ../views/dashboard_finance.php?status=success");
+            } elseif ($current_role === 'cashier') {
+                header("Location: ../views/dashboard_cashier.php?status=success");
+            } else {
+                header("Location: ../index.html");
+            }
+        } else {
+            header("Location: ../index.html");
+        }
+        exit;
 
     } catch (PDOException $e) {
         die("Database entry failed: " . $e->getMessage());
