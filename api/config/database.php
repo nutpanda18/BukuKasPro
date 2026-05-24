@@ -8,7 +8,7 @@ $pass = getenv("RTUpMBtlWgl0bf4g");
 
 try {
     // Configure PDO to enforce an encrypted SSL tunnel
-    $dsn = "mysql:host=$host;port=$port;dbname=$db_name;charset=utf8mb4";
+    $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=utf8mb4";
     
     $options = [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
