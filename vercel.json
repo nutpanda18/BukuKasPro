@@ -2,11 +2,11 @@
   "version": 2,
   "builds": [
     {
-      "src": "views/**/*.php",
+      "src": "views/*.php",
       "use": "vercel-php@0.5.2"
     },
     {
-      "src": "proses/**/*.php",
+      "src": "proses/*.php",
       "use": "vercel-php@0.5.2"
     },
     {
@@ -19,6 +19,14 @@
     }
   ],
   "routes": [
+    {
+      "src": "/views/(.*)",
+      "dest": "/views/$1"
+    },
+    {
+      "src": "/proses/(.*)",
+      "dest": "/proses/$1"
+    },
     {
       "src": "/$",
       "dest": "/index.html"
