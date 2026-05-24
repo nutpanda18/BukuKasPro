@@ -529,9 +529,16 @@ body.landing-body {
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
 }
 
+
+.form-input:focus, .register-select-control:focus {
+    border-color: var(--accent-blue); /* Berubah dari #4f46e5 menjadi Biru Aksen */
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15); /* Ring glow mengikuti biru aksen */
+}
+
 .btn-primary {
     width: 100%;
-    background-color: #4f46e5; /* Indigo 600 */
+    background-color: var(--accent-blue); /* Menembak variabel biru aksen #3b82f6 */
     color: #ffffff;
     font-weight: 700;
     border: none;
@@ -540,10 +547,11 @@ body.landing-body {
     cursor: pointer;
     font-size: 0.95rem;
     letter-spacing: 0.01em;
-    transition: background-color 0.2s;
+    transition: all 0.2s;
     margin-top: 0.5rem;
 }
 
 .btn-primary:hover {
-    background-color: #4338ca;
+    background-color: var(--accent-hover); /* Menembak biru hover #2563eb saat disentuh */
+    transform: translateY(-1px);
 }
