@@ -17,7 +17,7 @@
   "routes": [
     {
       "src": "/$",
-      "dest": "/index.php"
+      "dest": "/index.html"
     },
     {
       "src": "/(.*)",
