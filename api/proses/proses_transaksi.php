@@ -12,9 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $jenis      = $_POST['jenis_transaksi'];
     $keterangan = trim($_POST['keterangan']);
     
-    // 🌟 THE FIX: Append the live server clock time (WIB) to the incoming date string
-    if (!empty($_POST['tanggal'])) {
-        $tanggal = $_POST['tanggal'] . ' ' . date('H:i:s');
+    // 🌟 ENHANCED DATE CAPTURE: Match fallback options reliably
+    $input_tanggal = $_POST['tanggal'] ?? date('Y-m-d');
+    if (!empty($input_tanggal)) {
+        $tanggal = $input_tanggal . ' ' . date('H:i:s');
     } else {
         $tanggal = date('Y-m-d H:i:s');
     }
