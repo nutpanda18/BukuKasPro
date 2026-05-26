@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Jakarta');
 
 $host = "gateway01.ap-southeast-1.prod.alicloud.tidbcloud.com";
 $port = "4000";

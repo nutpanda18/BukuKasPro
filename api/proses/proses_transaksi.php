@@ -8,10 +8,16 @@ require_once dirname(__DIR__) . '/config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nominal    = floatval($_POST['nominal']);
-    $tanggal    = $_POST['tanggal'];
     $kategori   = $_POST['kategori'];
     $jenis      = $_POST['jenis_transaksi'];
     $keterangan = trim($_POST['keterangan']);
+    
+    // 🌟 THE FIX: Append the live server clock time (WIB) to the incoming date string
+    if (!empty($_POST['tanggal'])) {
+        $tanggal = $_POST['tanggal'] . ' ' . date('H:i:s');
+    } else {
+        $tanggal = date('Y-m-d H:i:s');
+    }
     
     // Read from cookies
     $user_id    = $_COOKIE['user_id'];
@@ -31,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        // 🌟 ADDED FIX FOR TiDB CLUSTERED INDEX: Generate random unique transaction ID
+        // ADDED FIX FOR TiDB CLUSTERED INDEX: Generate random unique transaction ID
         $transaksi_id = rand(100000, 999999);
 
         // 3. Simpan transaksi baru ke database (Explicitly include the id parameter)
