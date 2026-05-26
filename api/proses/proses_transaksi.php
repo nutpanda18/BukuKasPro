@@ -24,16 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_role  = $_COOKIE['role']; 
     $nama_nota  = null;
 
-    // Handle file upload
+    // 🌟 VERCEL-COMPATIBLE FILE HANDLING: Convert upload directly into a Base64 String
     if (isset($_FILES['nota']) && $_FILES['nota']['error'] === UPLOAD_ERR_OK) {
-        $target_dir = dirname(__DIR__) . "/uploads/";
-        if (!is_dir($target_dir)) {
-            mkdir($target_dir, 0755, true);
-        }
-        $file_name = time() . '_' . basename($_FILES['nota']['name']);
-        if (move_uploaded_file($_FILES['nota']['tmp_name'], $target_dir . $file_name)) {
-            $nama_nota = $file_name;
-        }
+        $file_tmp   = $_FILES['nota']['tmp_name'];
+        $file_type  = $_FILES['nota']['type'];
+        $file_data  = file_get_contents($file_tmp);
+        
+        // Encode image contents to string: data:image/jpeg;base64,/9j/4AAQSk...
+        $nama_nota  = 'data:' . $file_type . ';base64,' . base64_encode($file_data);
     }
 
     try {
