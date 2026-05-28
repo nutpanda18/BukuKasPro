@@ -67,7 +67,7 @@ try {
             <div class="panel-form-wide cashier-card">
                 <h3 class="cashier-card-title">🛒 Input Penjualan Toko Harian</h3>
                 
-                <form action="../proses/proses_transaksi.php" method="POST" class="cashier-form-stack">
+                <form action="../proses/proses_transaksi.php" method="POST" enctype="multipart/form-data" class="cashier-form-stack">
                     <input type="hidden" name="redirect_to" value="dashboard_cashier.php">
 
                     <div class="cashier-field-group">
@@ -99,6 +99,12 @@ try {
                     <div class="cashier-field-group">
                         <label class="cashier-label">Keterangan / Item Terjual</label>
                         <input type="text" name="keterangan" placeholder="Contoh: Penjualan baju kaos 3 pcs" class="cashier-input">
+                    </div>
+
+                    <div class="cashier-field-group">
+                        <label class="cashier-label">Upload Nota / Struk Digital (Opsional)</label>
+                        <input type="file" name="nota" accept="image/*" class="cashier-input" style="padding: 0.5rem; background: #ffffff;">
+                        <span style="font-size: 0.7rem; color: #64748b; margin-top: 0.2rem; display: block;">Format: Gambar (JPG, PNG, WebP)</span>
                     </div>
 
                     <button type="submit" class="btn-cashier-submit">Simpan Transaksi Toko</button>
